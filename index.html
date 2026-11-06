@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Web de Dayana Rodríguez</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-red: #ef4444;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+        }
+
+        [data-theme="pastel-green"] {
+            --card-bg: #143527;
+            --accent-purple: #10b981;
+        }
+        [data-theme="soft-yellow"] {
+            --card-bg: #332b12;
+            --accent-purple: #f59e0b;
+        }
+        [data-theme="vibrant-purple"] {
+            --card-bg: #2e1065;
+            --accent-purple: #c084fc;
+        }
+        [data-theme="coral-red"] {
+            --card-bg: #450a0a;
+            --accent-purple: #f87171;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        header {
+            border: 3px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--card-bg);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+        }
+
+        header h1 {
+            color: var(--accent-red);
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        nav {
+            border: 2px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 12px;
+            background-color: var(--card-bg);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 6px 16px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-red);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-box {
+            border: 2px solid var(--accent-purple);
+            border-radius: 12px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent-purple);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .bio-text {
+            line-height: 1.6;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .badge {
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid var(--accent-purple);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .mp3-cloud {
+            background: rgba(168, 85, 247, 0.15);
+            border: 2px dashed var(--accent-purple);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .mp3-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+        }
+
+        .player-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn {
+            background-color: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        canvas#visualizer {
+            width: 100%;
+            height: 80px;
+            background: #090d16;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .female-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--card-bg);
+            border: 2px solid var(--accent-purple);
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-purple);
+            margin: 15px 0;
+        }
+
+        .color-palette-box {
+            border: 2px solid var(--accent-green);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+            background: rgba(34, 197, 94, 0.05);
+        }
+
+        .color-palette-box h3 {
+            color: var(--accent-green);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .theme-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .dot-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .dot-btn:hover {
+            transform: scale(1.2);
+        }
+
+        footer {
+            border: 3px solid var(--accent-red);
+            border-radius: 12px;
+            padding: 20px;
+            background-color: var(--card-bg);
+            text-align: center;
+        }
+
+        footer h2 {
+            color: var(--accent-red);
+            margin-bottom: 10px;
+        }
+
+        .email-link {
+            color: var(--accent-yellow);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+
+        .email-link:hover {
+            text-decoration: underline;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal img {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 12px;
+            border: 3px solid var(--accent-purple);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>DAYANA</h1>
+    </header>
+
+    <nav>
+        <a href="#biografia">Biografía</a>
+        <a href="#fotos">Fotos</a>
+        <a href="#musica">Music Video</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="main-content">
+        <!-- Columna Izquierda: Biografía y Fotos -->
+        <div class="section-box" id="biografia">
+            <div class="profile-card">
+                <img src="dayana.jpg" alt="Foto de Dayana Rodríguez" class="profile-img" onclick="openModal(this.src)">
+                <h2>Dayana Rodríguez</h2>
+                <p style="color: var(--text-muted);">29 años | Estudiante de Ingeniería en Sistemas</p>
+                <div class="badge-container">
+                    <span class="badge">UTB - FAFI</span>
+                    <span class="badge">Sistemas</span>
+                    <span class="badge">Música & Arte</span>
+                </div>
+            </div>
+
+            <div class="bio-text">
+                <p>¡Hola! Mi nombre es <strong>Dayana Rodríguez</strong>, tengo 29 años y actualmente curso la carrera de <strong>Ingeniería en Sistemas</strong> en la Facultad de Administración, Finanzas e Informática (FAFI) de la Universidad Técnica de Babahoyo (UTB).</p>
+                <br>
+                <p>Me apasiona la tecnología, el desarrollo de software y la expresión artística musical. Esta página web reúne mi perfil personal, mi galería de fotos y proyectos interactivos de audio y video.</p>
+            </div>
+
+            <div id="fotos" style="margin-top: 25px;">
+                <h3 style="color: var(--accent-purple); margin-bottom: 10px;">Galería de Fotos</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <img src="dayana.jpg" alt="Dayana Rodríguez" style="width: 100%; height: 140px; object-fit: cover; border-radius: 8px; cursor: pointer;" onclick="openModal(this.src)">
+                    <div style="background: rgba(255,255,255,0.05); border: 2px dashed var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.9rem;">
+                        + Más Fotos
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna Derecha: MP3, Autora, Paleta y Video -->
+        <div class="section-box" id="musica">
+            <div class="mp3-cloud">
+                <div class="mp3-title">☁️ 1 o 2 MP3</div>
+                <div class="player-controls">
+                    <p id="current-track" style="font-weight: 600; margin-bottom: 5px;">Pista 1: Algoritmo Armónico</p>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn" onclick="togglePlay()">▶ Reproducir / Pausa</button>
+                        <button class="btn" style="background-color: var(--border-color);" onclick="switchTrack()">🔀 Cambiar Pista (1/2)</button>
+                    </div>
+                </div>
+                <canvas id="visualizer"></canvas>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="female-badge">
+                    <span>♀</span> OK
+                </div>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <h3 style="color: var(--text-main); margin-bottom: 8px; font-size: 1.1rem;">Video Musical</h3>
+                <div style="width: 100%; height: 180px; background: #000; border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid var(--border-color);">
+                    <span style="font-size: 2.5rem; color: var(--accent-red);">🎬</span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Music Video Demonstrative Player</p>
+                </div>
+            </div>
+
+            <div class="color-palette-box">
+                <h3>Paleta de Colores</h3>
+                <div class="theme-buttons">
+                    <div class="dot-btn" style="background: #0f172a;" title="Original Dark" onclick="setTheme('default')"></div>
+                    <div class="dot-btn" style="background: #143527;" title="Verde Pastel" onclick="setTheme('pastel-green')"></div>
+                    <div class="dot-btn" style="background: #332b12;" title="Amarillo Suave" onclick="setTheme('soft-yellow')"></div>
+                    <div class="dot-btn" style="background: #2e1065;" title="Púrpura" onclick="setTheme('vibrant-purple')"></div>
+                    <div class="dot-btn" style="background: #450a0a;" title="Rojo Coral" onclick="setTheme('coral-red')"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="contacto">
+        <h2>Escríbeme</h2>
+        <p>¿Tienes alguna duda o proyecto en mente? Contáctame a mi correo institucional:</p>
+        <a href="mailto:dayana.rodriguez@fafi.utb.edu.ec" class="email-link">✉️ dayana.rodriguez@fafi.utb.edu.ec</a>
+        <br>
+        <a href="mailto:manuxi@fafi.utb.edu.ec" class="email-link" style="font-size: 1rem; opacity: 0.8;">(manuxi@fafi.utb.edu.ec)</a>
+    </footer>
+
+    <div class="modal" id="imgModal" onclick="closeModal()">
+        <img id="modalImg" src="" alt="Vista previa">
+    </div>
+
+    <script>
+        // Modal de fotos
+        function openModal(src) {
+            document.getElementById('modalImg').src = src;
+            document.getElementById('imgModal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('imgModal').style.display = 'none';
+        }
+
+        // Cambio de Paleta de Colores
+        function setTheme(theme) {
+            if (theme === 'default') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+        }
+
+        // Reproductor Sintetizado de Audio con Web Audio API (Simulación 1 o 2 MP3)
+        let audioCtx;
+        let isPlaying = false;
+        let currentTrack = 1;
+        let osc;
+
+        function initAudio() {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        function togglePlay() {
+            if (!audioCtx) initAudio();
+            if (isPlaying) {
+                if (osc) osc.stop();
+                isPlaying = false;
+            } else {
+                playTone();
+                isPlaying = true;
+                drawVisualizer();
+            }
+        }
+
+        function switchTrack() {
+            currentTrack = currentTrack === 1 ? 2 : 1;
+            document.getElementById('current-track').innerText = currentTrack === 1 ? 
+                'Pista 1: Algoritmo Armónico' : 'Pista 2: Código & Ritmo';
+            if (isPlaying) {
+                if (osc) osc.stop();
+                playTone();
+            }
+        }
+
+        function playTone() {
+            osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = currentTrack === 1 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(currentTrack === 1 ? 440 : 330, audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+        }
+
+        // Canvas Visualizer
+        const canvas = document.getElementById('visualizer');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
+        function drawVisualizer() {
+            if (!isPlaying) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                return;
+            }
+            requestAnimationFrame(drawVisualizer);
+            ctx.fillStyle = 'rgba(9, 13, 22, 0.2)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const bars = 30;
+            const barWidth = canvas.width / bars;
+            for (let i = 0; i < bars; i++) {
+                const barHeight = Math.random() * canvas.height * 0.8;
+                ctx.fillStyle = currentTrack === 1 ? '#a855f7' : '#eab308';
+                ctx.fillRect(i * barWidth, canvas.height - barHeight, barWidth - 2, barHeight);
+            }
+        }
+    </script>
+</body>
+</html>
